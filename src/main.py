@@ -5,21 +5,23 @@ import serial
 
 from src.domain.slider import Slider
 from src.services import port_reader as reader
+from src.services.keyboard_controller import read_keypress
 from src.services.volume_controller import control_volume, load_config
 
 
 def main():
-    load_config()
     port = open_port()
-
     main_loop(port)
 
 
 def main_loop(port):
-    while 1:
+    while port.isOpen():
+        load_config()
+
         line = port.readline()
 
         line = line.removesuffix(bytes("\r\n", "utf-8"))
+        if bytes('SLIDERINFO-', "utf-8") not in line : print(line)
 
         if bytes('SLIDERINFO-', "utf-8") in line:
             line = line.removeprefix(bytes('SLIDERINFO-', 'utf-8'))
@@ -35,9 +37,7 @@ def main_loop(port):
 
         if bytes('KEYPRESS-', "utf-8") in line:
             key = int(line.removeprefix(bytes('KEYPRESS-', 'utf-8')))
-            print(key)
-        if keyboard.is_pressed('q'):  # if key 'q' is pressed
-            break
+            read_keypress(key)
 
 
 def open_port():
