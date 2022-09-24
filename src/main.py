@@ -5,10 +5,11 @@ import serial
 
 from src.domain.slider import Slider
 from src.services import port_reader as reader
-from src.services.volume_controller import control_volume
+from src.services.volume_controller import control_volume, load_config
 
 
 def main():
+    load_config()
     port = open_port()
 
     main_loop(port)
@@ -27,7 +28,7 @@ def main_loop(port):
             i = 0
             for v in split:
                 try:
-                    control_volume(Slider(i, int(v)))
+                    control_volume(Slider("A{}".format(i), int(v)))
                 except ValueError:
                     pass
                 i += 1

@@ -2,3 +2,5 @@ keyboard
 pyserial
 setuptools==65.3.0
 pycaw
+pyyaml
+watchdog
