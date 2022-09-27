@@ -11,25 +11,15 @@ class VolumeController:
     devices = AudioUtilities.GetSpeakers()
     interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
     volume = cast(interface, POINTER(IAudioEndpointVolume))
-    config = {}
-    path = "config.yaml"
 
+    def __init__(self, config):
+        self.config = config
 
-def control_volume(slider):
-    value = get_percentage(slider)
-    config = VolumeController.config[slider.id]
-    if config is not None:
-        set_volume(config, value)
-
-
-def get_percentage(slider):
-    percentage = 0.0
-    if not slider.value == 0:
-        percentage = Decimal(Decimal((slider.value / 1023)).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP))
-    elif percentage < 0:
-        percentage = 0.0
-
-    return percentage
+    def control_volume(self, slider):
+        value = get_percentage(slider)
+        config = self.config[slider.id]
+        if config is not None:
+            set_volume(config, value)
 
 
 def set_volume(config, value):
@@ -45,22 +35,11 @@ def set_volume(config, value):
                 volume.SetMasterVolume(value, None)
 
 
-def load_config():
-    if not exists(VolumeController.path):
-        file = open(VolumeController.path, "x")
-        file.write("# Thank you for using PyDeejPlus\n"
-                   "# For every slider you can add an entry, every entry can control:\n"
-                   "# master volume with master, microphone with mic or an executable by {name}.exe\n"
-                   "# below I have supplied you with an example setup\n"
-                   "A0: master\n"
-                   "A1: spotify.exe\n"
-                   "A2: \n"
-                   "    - msedge.exe\n"
-                   "    - vlc.exe\n"
-                   "A3: \n"
-                   "A4: \n"
-                   "A5: \n"
-                   "A6: \n"
-                   "A7: \n")
-        file.close()
-    VolumeController.config = yaml.load(open(VolumeController.path), Loader=yaml.FullLoader)
+def get_percentage(slider):
+    percentage = 0.0
+    if not slider.value == 0:
+        percentage = Decimal(Decimal((slider.value / 1023)).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP))
+    elif percentage < 0:
+        percentage = 0.0
+
+    return percentage
