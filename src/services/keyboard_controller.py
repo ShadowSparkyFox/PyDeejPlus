@@ -1,7 +1,7 @@
-from collections.abc import Sequence
 from time import sleep
 
 import keyboard
+
 
 class KeyboardController:
     def __init__(self, config):

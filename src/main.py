@@ -1,10 +1,10 @@
 import serial
 
-from src.domain.slider import Slider
-from src.services import port_reader as reader
-from src.services.config import Config
-from src.services.keyboard_controller import KeyboardController
-from src.services.volume_controller import VolumeController
+from domain.slider import Slider
+from services import port_reader as reader
+from services.config import Config
+from services.keyboard_controller import KeyboardController
+from services.volume_controller import VolumeController
 
 
 def main():

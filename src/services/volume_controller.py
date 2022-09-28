@@ -1,10 +1,8 @@
-from os.path import exists
-
-import yaml
-from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
-from comtypes import CLSCTX_ALL
 from ctypes import POINTER, cast
 from decimal import Decimal, ROUND_HALF_UP
+
+from comtypes import CLSCTX_ALL
+from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 
 
 class VolumeController:

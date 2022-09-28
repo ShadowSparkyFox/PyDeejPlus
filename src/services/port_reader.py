@@ -1,6 +1,7 @@
 import serial.tools.list_ports
-from src.domain.port import Port
-from src.services import prompts
+
+from domain.port import Port
+from services import prompts
 
 
 def serial_ports():
