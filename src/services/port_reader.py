@@ -32,7 +32,8 @@ def find_arduino():
         for hit in hits:
             values_to_pass.append(ports[hit])
         return prompts.prompt_user(values_to_pass, 'You have multiple Arduino\'s please pick one')
-    elif len(hits) == 0 & the_arduino == -1:
-        return prompts.prompt_user(ports, 'We did  not find an Arduino, please pick a COM port')
+    elif len(hits) == 0 and the_arduino == -1:
+        user_input = prompts.prompt_user(ports, 'We did  not find an Arduino, please pick a COM port')
+        return user_input.split(' - ')[0]
     else:
-        return ports[the_arduino]
+        return ports[the_arduino].port_id

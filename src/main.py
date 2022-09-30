@@ -40,7 +40,7 @@ def main_loop(port, volume_controller, keyboard_controller):
 
 def open_port():
     port = reader.find_arduino()
-    port = serial.Serial(port=port.port_id)
+    port = serial.Serial(port=port)
     if not port.isOpen():
         port.open()
     return port

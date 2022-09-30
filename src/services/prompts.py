@@ -9,7 +9,7 @@ def prompt_user(values, message):
     root.geometry("300x50")
     root.resizable(False, False)
     # @TODO: figure out ico packaging and such
-    root.iconbitmap('C:/Users/josip/PyDeejPlus/src/resources/glassfox.ico')
+    root.iconbitmap('resources/glassfox.ico')
     ttk.Label(root, text=message).pack()
     box_value = tk.StringVar()
     combo = ttk.Combobox(root, textvariable=box_value, values=values)
