@@ -14,6 +14,7 @@ def main():
     keyboard_controller = KeyboardController(config.key_config())
     main_loop(port, volume_controller, keyboard_controller)
 
+
 def main_loop(port, volume_controller, keyboard_controller):
     while port.isOpen():
         line = port.readline()
